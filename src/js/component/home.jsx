@@ -4,6 +4,21 @@ import React, { useState, useEffect } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
+const CSS1 = {
+  textAlign: "center",
+  marginTop: "100px",
+  backgroundColor: "Green",
+  width:"600px",
+}
+const CSS2 = {
+  textAlign: "center",
+  marginTop: "5px",
+  backgroundColor: "Green",
+  width:"600px",
+  paddingTop: "10px",  
+}
+
+
 const Home = () => {
 
   const [tarea, nueva] = useState([]);
@@ -27,14 +42,14 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://assets.breatheco.de/apis/fake/todos/user/lulukkks", requestOptions)
+fetch("https://assets.breatheco.de/apis/fake/todos/user/juli1", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-
   }
+
   useEffect(() => {
-    fetch("https://assets.breatheco.de/apis/fake/todos/user/lulukkks")
+    fetch("https://assets.breatheco.de/apis/fake/todos/user/juli1")
       .then((response) => response.json())
       .then((data) => nueva(data));
   }, []);
@@ -45,16 +60,20 @@ fetch("https://assets.breatheco.de/apis/fake/todos/user/lulukkks", requestOption
 
   return (
 
-    <div className="text-center">
+    <div className="text-center container">
+      <div className="text-center container" style={CSS1}>
       <h1>Lista de Tareas </h1>
-
+      </div>
+      <div className="text-center container" style={CSS2}>
       <form
         onSubmit={(event) => {
-          event.preventDefault(); /*que no se actualize el componente*/
+          event.preventDefault(); //que no se actualize el componente//
           nueva([...tarea, { label: event.target[0].value, done: false }]);
           putApi();
+          event.target[0].value="";
         }}
       >
+        
         <input type="text" placeholder="¿cual es tu tarea?"></input>
         <button> Ingresar </button>
       </form>
@@ -66,14 +85,14 @@ fetch("https://assets.breatheco.de/apis/fake/todos/user/lulukkks", requestOption
           </li>
         );
       })}
+      <div className="text-center container">
       <p>Cantidad de tareas {tarea.length}</p>
+      </div>
+    </div>
     </div>
   );
 
 }
 export default Home;
 
-/*useEffect(() => {
-    fetch("http://assets.breatheco.de/apis/fake/todos/user/lulukkks")
-    
-*/
+
